@@ -87,9 +87,9 @@
 {
     border-radius: 50%;
 }
-#resetButton{
-    background: #FF0000;
-}
+/* #resetButton{
+     background: #FF0000;  
+} */
 #resetButton:hover{
     background: #FFFFFF;
     cursor: no-drop;
