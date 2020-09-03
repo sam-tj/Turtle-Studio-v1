@@ -1,0 +1,400 @@
+<!DOCTYPE HTML>
+<HTML>
+    <head>
+        <meta charset="utf-8">
+        <meta name="google" value="notranslate">
+        <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+        <title>The Turtle Studio</title>
+        <link rel="icon" type="image/png" href="./turtleStudio/media/logo_only.png" />
+        <link rel="stylesheet" href="./css/font_awesome_all.min.css" />
+        <link rel="stylesheet" href="./css/keyboard_nav.css" />
+        <link rel="stylesheet" href="./css/lateral-panel.css" />
+        <link rel="stylesheet" href="./css/UI.css" />
+        <link rel="stylesheet" href="./turtleStudio/css/turtleStudio.css" />
+    </head>
+    <body>
+        <div class="table_wrapper">
+            <table style="width: 100%; height: 100%;">
+                <tr id="optionsTop" style="height: 30px;">
+                    <td style="width: 268px;white-space: nowrap;">
+                        <span id="appName" class='TitleText'></span>
+                    </td>
+                    <td class="tabMiddle" style="width: 100%;">
+                        <span id="content_hoverButton" ></span>
+                    </td>
+                </tr>
+                <tr style="height: 30px;">
+                    <td colspan="2">
+                        <button id="newButton"  class="iconButtons" onclick="Code.newProject()">
+                            <span id="newButton_span">
+                                <i class="far fa-file"></i>
+                            </span>
+                        </button>
+                        <button id="loadXMLfakeButton" class="iconButtons" onclick="Code.loadXmlBlocklyFile()">
+                            <span id="loadXMLfakeButton_span">
+                                <i class="fas fa-file-upload"></i>
+                            </span>
+                        </button>
+                        <button id="saveXMLButton" class="iconButtons" onclick="Code.saveXmlBlocklyFile()">
+                            <span id="saveXMLButton_span">
+                                <i class="fas fa-file-download"></i>
+                            </span>
+                        </button>
+                        <button id="saveCodeButton" class="iconButtons" onclick="Code.saveCodeFile()">
+                            <span id="saveCodeButton_span">
+                                <i class="fas fa-file-export"></i>
+                            </span>
+                        </button>                        
+                        <button id="verifyButton" class="iconButtons">
+                            <span id="verifyButton_span">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </button>
+                        <button id="serialButton" class="iconButtons" onclick="Code.portsListModalShow()">
+                            <span id="serialButton_span"> 
+                                <i class="fab fa-usb"></i>
+                            </span>
+                        </button>
+                        <button id="uploadButton" class="iconButtons">
+                            <span id="uploadButton_span">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </span>
+                        </button>
+                        <button id="serialConnectButton" class="iconButtons">
+                            <span id="serialConnectButton_span">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>                        
+                        <button id="helpButton" class="iconButtons" onclick="toggleDisplayHelpModal()">
+                            <span id="helpButton_span">
+                                <i class="fas fa-question"></i>
+                            </span>
+                        </button>
+						<span id="boardMenuSpan" class="UIText">...</span>
+                        <select id="boardMenu" onchange="changeBoard()">
+                            <option value="none" selected="selected">...</option>
+							<option value="turtle_board">Turtle Board</option>
+                            <option value="arduino_mega">Arduino Mega</option>
+                            <option value="arduino_nano">Arduino Nano</option>
+                            <option value="arduino_uno">Arduino Uno</option>
+                        </select>
+						<span id="serialMenuSpan" class="UIText">...</span>
+                        <select id="serialMenu">
+                            <option value="none">...</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="width: 100%; height: 100%;">
+                    <td colspan="2">
+                        <div class="content_wrapper">
+                            <div id="wrapper_up" class="wrapper_up">
+                                <div id="content_area">
+                                    <div id="content_blocks"></div>
+                                </div>
+                                <div id="separator">
+                                    
+                                </div>
+                                <button id="copyCodeButton" class="iconButtons" onclick="Code.copyToClipboard()">
+                                    <span id="copyCodeButton_span">
+                                        <i class="far fa-copy"></i>
+                                    </span>
+                                </button>
+                                <div id="content_code"></div>
+                            </div>
+                            <div id="barre_h" style="color: white; vertical-align: middle;">
+                                Output Pane                                
+                            </div>
+                            <div id="content_serial"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>                
+        <div id="helpModal">            
+            <div id="helpModal_header">
+                <button class="closeModal" type="button" onclick="toggleDisplayHelpModal()">X</button>
+                <span id="helpModalSpan_title"></span>
+            </div>
+            <div id="helpModal_text">
+                <span id="helpModalSpan_text"></span>
+            </div>
+        </div>        
+        <div id="keyboard_nav">
+            <div id="keyboard_nav_header">
+                <button class="closeModal" type="button" onclick="toggleDisplayKeyMappings(false)">X</button>
+                <span id="keyMappingModalSpan"></span>
+            </div>
+            <form id="keyboard_mappings"></form>
+        </div>
+        <div id="lateral-panel-CLI">
+            <input id="lateral-panel-CLI-input" type="checkbox">
+            <label id="lateral-panel-CLI-label" for="lateral-panel-CLI-input" class="label_panel">
+                <span id="config_side_span">
+                    <i class="fas fa-terminal"></i>
+                </span>
+            </label>
+            <div id="lateral-panel-CLI-bloc">
+                <div id="CLI_content" class="side_content config_content CLI">
+                    <div id="configCLI">
+                        <span id="CLI_title_span" class="UIText">CLI</span>
+                        <br>
+                        <div id="CLI_title" style="display:flex;text-align: center;">
+                            <button id="coreUpdateButton" class="iconButtons CLI" onclick="">
+                                <span id="coreUpdateButton_span">
+                                    <i class="fas fa-sync"></i>
+                                </span>
+                            </button>
+                            <button id="cleanCLIcacheButton" class="iconButtons CLI" onclick="">
+                                <span id="cleanCLIcache_span">
+                                    <i class="fas fa-eraser"></i>
+                                </span>
+                            </button>
+                            <button id="listBoardsButton" class="iconButtons CLI" onclick="">
+                                <span id="listBoardsButton_span">
+                                    <i class="fas fa-list"></i>
+                                </span>
+                            </button>
+                            <a href="https://arduino.github.io/arduino-cli/" id="CLI_githubLinkButton" target="_blank">
+                                <img src="./turtleStudio/media/featured-CLI.png" style="height: 40px" />
+                            </a>
+                        </div>
+                        <br>
+                        <span id="installBoard_title_span" class="UIText CLI">install board</span>
+                        <br>
+                        <input type="text" id="installBoardsInput" name="installBoardsInput" style="width: 250px;font-size:20px;">
+                        <button id="installBoardsButton" class="iconButtons CLI" onclick="">
+                            <span id="installBoardsButton_span">
+                                <i class="fas fa-cloud-download-alt"></i>
+                            </span>
+                        </button>
+                        <br>
+                        <br>
+                        <span id="searchlLib_title_span" class="UIText">search library</span>
+                        <br>
+                        <input type="text" id="searchlLibInput" name="searchlLibInput" style="width: 250px;font-size:20px;">
+                        <button id="searchlLibButton" class="iconButtons CLI" onclick="">
+                            <span id="searchlLibButton_span">
+                                <i class="fab fa-searchengin"></i>
+                            </span>
+                        </button>
+                        <br>
+                        <br>
+                        <span id="installLib_title_span" class="UIText">install library</span>
+                        <br>
+                        <input type="text" id="installLibInput" name="installLibInput" size="18" style="width: 250px;font-size:20px;">
+                        <button id="installLibButton" class="iconButtons CLI" onclick="">
+                            <span id="installLibButton_span">
+                                <i class="fas fa-cloud-download-alt"></i>
+                            </span>
+                        </button>
+                        <br>
+                        <button id="registerToOrchestrator" class="iconButtons CLI" onclick="ArrowheadRegister()">
+                            <span id="registerToOrchestrator_span">
+                                <i class="fas fa-plug"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lateral-panel-setup">
+            <input id="lateral-panel-setup-input" type="checkbox">
+            <label id="lateral-panel-setup-label" for="lateral-panel-setup-input" class="label_panel">
+                <span id="setup_side_span">
+                    <i class="fas fa-cog"></i>
+                </span>
+            </label>
+            <div id="lateral-panel-setup-bloc">
+                <div id="setup_content" class="side_content config_content">
+				<span class="UIText">Settings</span>
+				<br>
+				<br>
+					<button id="resetButton" class="iconButtons" onclick="Code.ResetWorkspace()">
+                            <span id="resetButton_span">
+                                <i class="fas fa-power-off"></i>
+                            </span>
+                    </button>
+					<button id="undoButton" class="iconButtons" onclick="Code.Undo()">
+                            <span id="undoButton_span" style="font-size: 1em;">
+                                <i class="fas fa-undo-alt"></i>
+                            </span>
+                    </button>
+                    <button id="redoButton" class="iconButtons" onclick="Code.Redo()">
+                            <i class="fas fa-redo-alt"></i>
+                            <span id="redoButton_span"></span>
+                    </button>
+					<button id="serialButton" class="iconButtons" onclick="Code.portsListModalShow()">
+                            <span id="serialButton_span">
+                                <i class="fab fa-usb"></i>
+                            </span>
+                    </button>
+					<button id="fullScreenButton" class="iconButtons" onclick="fullScreen()">
+                            <span id="fullScreenButton_span" style="font-size: 1em;">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </span>
+                        </button>
+                    <br>
+                    <br>                    
+                    <div id="editorReadOnlyToggle" > 
+                        <input type="checkbox" onclick="toggleEditorReadOnly(this)">                        
+                        <span id="editorReadOnlyToggle_span"> </span>
+                    </div>                    
+                    <div id="checkDetails">
+                        <input type="checkbox" name="detailedCompilation" id="detailedCompilation"/>
+                        <span id="detailedCompilation_span"> </span>
+                    </div>					
+					<br>
+                    <form id="options">                        
+                        <span id="renderSpan" class="UIText">...</span>
+                        <select name="renderer" onchange="document.forms.options.submit('options')">
+                            <option value="geras">Geras</option>
+                            <option value="thrasos">Thrasos</option>
+                            <option value="zelos">Zelos</option>
+                            <option value="minimalist">Minimalist</option>
+                        </select>
+                    </form>                    
+					<br>
+                    <span id="fontSizeSpan" class="UIText"></span>
+                    <select id="rendering-constant-selector">
+                        <option value="fontSizeBlocks" id="optionFontSizeBlocks" selected="selected">Blocks & Editor Font Size</option>
+                        <option value="fontSizePage" id="optionFontSizePage">Page Font Size</option>
+                        <option value="fontSpacingPage" id="optionFontSpacingPage">Page Font Spacing</option>
+                    </select>
+                    <br>
+                    <input type="range" min="3" max="50" value="4" oninput="Code.changeRenderingConstant(this.value)" onchange="Code.changeRenderingConstant(this.value)" />
+                    <br>
+                    <br>
+                    <input id="accessibilityModeCheck" type="checkbox" onclick="toggleAccessibilityMode(this.checked)">
+                    <span id="accessibilitySpan" class="UIText"></span>
+                    <br>
+                    <input id="displayKeyMappings" type="checkbox" onclick="toggleDisplayKeyMappings(this.checked)">
+                    <span id="keyMappingSpan" class="UIText"></span>
+                    <br>
+                    <select id="cursorChanger" name="cursor" onchange="changeCursor(this.value)">
+                        <option value="default" id="defaultCursorSpan">default</option> 
+                        <option value="basic" id="basicCursorSpan">basic</option>
+                        <option value="line" id="lineCursorSpan">line</option>
+                    </select>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div id="overlayForModals" class="overlay" style="display: none;"></div>
+        <div id="boardListModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"> 
+                    <i class="fa fa-microchip"></i>Boards description
+                    <span class="closeModal" id="closeModalBoards">&times;</span>
+                </div>                
+                <button type="button" class="collapsibleButton">Details</button>                
+            </div>
+        </div>
+        <div id="portListModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fab fa-usb"></i>Modal Header Ports
+                    <span class="closeModal" id="closeModalPorts">&times;</span>
+                </div>
+                <div class="modal-body" id="portListModalBody">
+                </div>                
+            </div>
+        </div>
+    </body>
+    <!-- Blockly libraries -->
+    <script src="./@blockly/blockly_compressed.js"></script>
+    <script src="./@blockly/blocks_compressed.js"></script>
+    <script src="./@blockly/closure/goog/base.js"></script>
+    <!-- Blockly libraries for themes and renderers -->
+    <script src="./@blockly/core/workspace_comment.js" async></script>
+    <script src="./@blockly/core/workspace_comment_svg.js" async></script>
+    <script src="./@blockly/core/workspace_comment_render_svg.js" async></script>
+    <script src="./@blockly/core/renderers/minimalist/info.js" async></script>
+    <script src="./@blockly/core/renderers/minimalist/constants.js" async></script>
+    <script src="./@blockly/core/renderers/minimalist/drawer.js" async></script>
+    <script src="./@blockly/core/renderers/minimalist/renderer.js" async></script>
+    <script src="./@blockly/core/theme/modern.js" async></script>
+    <script src="./@blockly/core/theme/zelos.js" async></script>
+    <!-- Blockly libraries of function, from different demos -->
+    <script src="./@blockly/demos/code/code.js"></script>
+    <script src="./@blockly/demos/keyboard_nav/line_cursor.js" async></script>
+    <script src="./@blockly/tests/playgrounds/screenshot.js" async></script>
+    <!-- Blockly libraries of function, hacked from different demos -->
+    <script src="./js/blockly/keyboard_nav.js"></script>
+    <script src="./js/blockly/playground.js"></script>
+    <script src="./js/init.js"></script>
+    <script src="./js/typed_variable.js"></script>
+    <script src="./js/buttons_functions.js"></script>
+    <script src="./js/dialog.js"></script>
+    <script src="./js/renderingConstant.js"></script>
+    <script src="./@blockly/demos/custom-dialogs/custom-dialog.js"></script>
+    <!-- turtleStudio libraries of external functions -->
+    <script src="./js/ace/ace.js" charset="utf-8"></script>
+    <script src="./js/ace/ext-language_tools.js"></script>
+    <!-- turtleStudio libraries of boards definition -->
+    <script src="./turtleStudio/js/boards.json"></script>
+    <script src="./turtleStudio/js/boards.js"></script>
+    <!-- turtleStudio specific: block design -->
+    <script src="./turtleStudio/blocks/blocks_colors.js" async></script>
+    <script src="./turtleStudio/blocks/board/board_base.js" async></script>
+    <script src="./turtleStudio/blocks/board/board_serial.js" async></script>
+    <script src="./turtleStudio/blocks/blockly/logic.js" async></script>
+    <script src="./turtleStudio/blocks/blockly/math.js" async></script>
+    <script src="./turtleStudio/blocks/grove/grove.js" async></script>
+    <script src="./turtleStudio/blocks/servo/servo.js" async></script>
+    <script src="./turtleStudio/blocks/turtleSensors/turtle.js" async></script>
+    <script src="./turtleStudio/blocks/typed_variable.js" async></script>
+    <!-- turtleStudio specific: common generator code -->
+    <script src="./generators/arduino_generator.js"></script>
+    <script src="./turtleStudio/arduino/blockly/colour.js" async></script>
+    <script src="./turtleStudio/arduino/blockly/lists.js" async></script>
+    <script src="./turtleStudio/arduino/blockly/logic.js" async></script>
+    <script src="./turtleStudio/arduino/blockly/loops.js" async></script>
+    <script src="./turtleStudio/arduino/blockly/math.js" async></script>
+    <script src="./turtleStudio/arduino/blockly/procedures.js" async></script>
+    <script src="./turtleStudio/arduino/blockly/text.js" async></script>
+    <!-- turtleStudio specific: addon generator code -->
+    <script src="./turtleStudio/arduino/board/board_base.js" async></script>
+    <script src="./turtleStudio/arduino/board/board_serial.js" async></script>
+    <script src="./turtleStudio/arduino/typed_variable.js" async></script>
+    <script src="./turtleStudio/arduino/addon/grove.js" async></script>
+    <script src="./turtleStudio/arduino/addon/turtle.js" async></script>
+    <script src="./turtleStudio/arduino/addon/servo.js" async></script>
+    <!-- turtleStudio specific -->
+    <!-- Blockly themes added -->
+    <script src="./turtleStudio/themes/bw.js" async></script>
+    <script src="./turtleStudio/themes/themes_blocks.js" async></script>
+    <script src="./turtleStudio/themes/themes_categories.js" async></script>
+    <script src="./turtleStudio/themes/themes_components_override.js" async></script>
+    <!-- turtleStudio external toolbox hacked -->
+    <script src="./turtleStudio/toolbox/toolbox_turtleStudio.js"></script>
+    <script src="./turtleStudio/toolbox/toolbox_standard.js"></script>
+    <script>
+        ace.require("ace/ext/language_tools");
+        var editor = ace.edit("content_code");
+        editor.setTheme("ace/theme/sqlserver");
+        editor.session.setMode("ace/mode/c_cpp");
+        editor.setShowPrintMargin(false);
+        editor.setOptions({
+            autoScrollEditorIntoView: false,
+            readOnly: false,
+            highlightGutterLine: true,
+            animatedScroll: true,
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+        editor.find('needle', {
+            backwards: false,
+            wrap: false,
+            caseSensitive: false,
+            wholeWord: false,
+            regExp: false
+        });
+        editor.findNext();
+        editor.findPrevious();
+         require('../CLI_functions.js'); 
+         require('../IDE_functions.js'); 
+        // require('../resources/app.asar/CLI_functions.js');
+        // require('../resources/app.asar/IDE_functions.js');
+    </script>
+</HTML>
