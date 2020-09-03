@@ -213,7 +213,7 @@ Code.saveXmlBlocklyFile = function () {
     Blockly.prompt(MSG['save_span'], 'New Project', function (fileNameSave) {
         if (fileNameSave) {
             var fakeDownloadLink = document.createElement("a");
-            fakeDownloadLink.download = fileNameSave + ".mmsf";
+            fakeDownloadLink.download = fileNameSave + ".tsf";
             fakeDownloadLink.href = window.URL.createObjectURL(blob);
             fakeDownloadLink.onclick = function destroyClickedElement(event) {
                 document.body.removeChild(event.target);
@@ -249,7 +249,7 @@ Code.loadXmlBlocklyFile = function () {
         var selectFileDom = document.createElement('INPUT');
         selectFileDom.type = 'file';
         selectFileDom.id = 'select_file';
-        selectFileDom.accept = '.mmsf, .xml';
+        selectFileDom.accept = '.tsf, .xml';
         selectFileDom.style.display = 'none';
         document.body.appendChild(selectFileDom);
         selectFile = document.getElementById('select_file');
