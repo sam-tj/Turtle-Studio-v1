@@ -150,8 +150,8 @@ td.tabMiddle {
 }
 
 #content_hoverButton {
-    margin: 5px;
-    padding: 10px;
+    margin: 5px 5px 0px 5px;
+    padding: 10px 10px 0px 10px;
     border-radius: 4px;
     font-size: x-large;
     color: #FFFFFF;
@@ -256,6 +256,11 @@ td.tabMiddle {
     height: 10px;
     min-height: 10px;
 }
+
+hr.solid {
+    border-top: 1px solid #202A44;
+    border-bottom: 2px solid #202A44;
+  }
 
 /* The boards list modal (background) */
 .modal {
