@@ -19,6 +19,9 @@ Blockly.Themes.Classic.categoryStyles['seeed_category'] = {
 Blockly.Themes.Classic.categoryStyles['grove_category'] = {
     "colour": "#91C11E"
 };
+Blockly.Themes.Classic.categoryStyles['turtle_category'] = {
+    "colour": "#DB3A34"
+};
 Blockly.Themes.Classic.categoryStyles['servo_category'] = {
     "colour": "#343434"
 };
@@ -33,7 +36,7 @@ Blockly.Themes.Modern.categoryStyles['grove_category'] = {
     "colour": "#91C11E"
 };
 Blockly.Themes.Modern.categoryStyles['turtle_category'] = {
-    "colour": "#91C11E"
+    "colour": "#DB3A34"
 };
 Blockly.Themes.Modern.categoryStyles['servo_category'] = {
     "colour": "#343434"

@@ -99,6 +99,7 @@
     cursor: help;
 }
 #copyCodeButton{
+    visibility: hidden;
     color: #000000;
     position: absolute;
     top: 70px;

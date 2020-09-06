@@ -82,6 +82,7 @@ function exitFullScreen() {
  * Copy code from div code_peek in clipboard system
  */
 Code.copyToClipboard = function () {
+    var textToCopy;
     if (document.selection) { // IE
         var range = document.body.createTextRange();
         range.moveToElementText(document.getElementsByClassName("ace_content")[0]);
@@ -91,8 +92,11 @@ Code.copyToClipboard = function () {
         range.selectNode(document.getElementsByClassName("ace_content")[0]);
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(range);
+        textToCopy = range;
     }
-    document.execCommand("copy");
+    navigator.clipboard.writeText(textToCopy)
+  .then(() => { alert(`Copied!`) })
+  .catch((error) => { alert(`Copy failed! ${error}`) });
 };
 
 /**

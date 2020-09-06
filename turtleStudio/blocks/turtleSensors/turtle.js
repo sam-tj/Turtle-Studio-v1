@@ -2,7 +2,7 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly');
 
 var turtleSensorsFolder = "./turtleStudio/blocks/turtleSensors/";
-
+var groveMediaFolder = "./turtleStudio/blocks/grove/";
 
 Blockly.Blocks['turtle_button'] = {
     init: function () {
@@ -96,3 +96,29 @@ Blockly.Blocks['turtle_ldr_sensor'] = {
     }
 };
 
+Blockly.Blocks['turtle_i2c_lcd_print'] = {
+    init: function () {
+        this.appendDummyInput()
+                .appendField("I2C LCD")
+                .appendField(new Blockly.FieldImage(groveMediaFolder + "Lcdnew1.jpg", 64, 64))
+                .appendField("PIN#")
+                .appendField(new Blockly.FieldDropdown([["A4", "A4"]]), "PIN");
+        this.appendValueInput("TEXT1")
+                .setCheck(stringCompatibility)
+                .setAlign(Blockly.ALIGN_RIGHT)
+                .appendField("print line1");
+        this.appendValueInput("TEXT2")
+                .setCheck(stringCompatibility)
+                .setAlign(Blockly.ALIGN_RIGHT)
+                .appendField("print line2")
+        this.appendValueInput("DELAY_TIME")
+                .setCheck(intCompatibility)
+                .setAlign(Blockly.ALIGN_RIGHT)
+                .appendField("Delay");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('print text on an 16 character by 2 line LCD.');
+        this.setHelpUrl('https://wiki.seeedstudio.com/Grove-16x2_LCD_Series/');
+        this.setStyle('turtle_blocks');
+    }
+};

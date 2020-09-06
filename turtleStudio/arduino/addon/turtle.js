@@ -66,3 +66,29 @@ Blockly.Arduino['turtle_ldr_sensor'] = function (block) {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino['turtle_i2c_lcd_print'] = function (block) {
+    var dropdown_pin = block.getFieldValue('PIN');
+    var text = Blockly.Arduino.valueToCode(block, 'TEXT1',
+            Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';
+    var text2 = Blockly.Arduino.valueToCode(block, 'TEXT2',
+            Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';
+    var delay_time = Blockly.Arduino.valueToCode(block, 'DELAY_TIME', Blockly.Arduino.ORDER_ATOMIC) || '1000';
+    /*if(text.length>16||text2.length>16){
+     alert("string is too long");
+     }*/    
+    Blockly.Arduino.definitions_['define_softwareserial'] = '#include <SoftwareSerial.h>\n';
+    Blockly.Arduino.definitions_['define_i2clcd'] = '#include <LiquidCrystal_I2C.h>\n';
+    //generate PIN#+1 port
+    var NextPIN = _get_next_pin(dropdown_pin);
+
+    Blockly.Arduino.definitions_['var_lcd_' + dropdown_pin] = 'LiquidCrystal_I2C lcd(0x27, 16, 2); // SDA '+dropdown_pin + ' , SCL ' + NextPIN+'\n';
+
+    Blockly.Arduino.setups_['setup_lcd_' + dropdown_pin] = 'lcd.begin();\n';
+    var code = 'lcd.backlight();\n';
+    code += 'lcd.setCursor(0,0);\n';
+    code += 'lcd.print(' + text + ');\n'; //text.replace(new RegExp('\'',"gm"),'')
+    code += 'lcd.setCursor(0,1);\n';
+    code += 'lcd.print(' + text2 + ');\n';
+    code += 'delay(' + delay_time + ');\n';
+    return code;
+};
