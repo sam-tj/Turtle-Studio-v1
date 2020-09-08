@@ -122,7 +122,7 @@ Blockly.Blocks['vars_set_define'] = {
         var textInput = new Blockly.FieldTextInput('SOMETHING');
         this.appendDummyInput()
                 .appendField("use")
-                .appendField(new Blockly.FieldVariable("", null, ['//#define'], '//#define'), "VAR_SET_DEFINE")
+                .appendField(new Blockly.FieldVariable("", null, ['//Using'], '//Using'), "VAR_SET_DEFINE")
                 .appendField("in place of")
                 .appendField(textInput, 'VALUE');
         this.setPreviousStatement(true, null);
@@ -136,7 +136,7 @@ Blockly.Blocks['vars_set_define'] = {
 Blockly.Blocks['vars_get_define'] = {
     init: function () {
         this.appendDummyInput()
-                .appendField(new Blockly.FieldVariable("", null, ['//#define'], '//#define'), "VAR_GET_DEFINE");
+                .appendField(new Blockly.FieldVariable("", null, ['//Using'], '//Using'), "VAR_GET_DEFINE");
         this.setOutput(true, "String");
         this.setStyle('variable_blocks');
         this.setTooltip("");

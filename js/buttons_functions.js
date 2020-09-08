@@ -93,6 +93,7 @@ Code.copyToClipboard = function () {
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(range);
         textToCopy = range;
+        console.log(textToCopy);
     }
     navigator.clipboard.writeText(textToCopy)
   .then(() => { alert(`Copied!`) })

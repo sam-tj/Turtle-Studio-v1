@@ -28,7 +28,7 @@ var createVarBtnBooleanCallBack = function (button) {
     Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'bool');
 };
 var createVarBtnDefineCallBack = function (button) {
-    Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, '//#define');
+    Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, '//Using');
 };
 
 var numVariablesCallBack = function (currWorkspace) {
@@ -135,7 +135,7 @@ var textVariablesCallBack = function (currWorkspace) {
 };
 
 var defineVariablesCallBack = function (currWorkspace) {
-    var allStringVars = currWorkspace.getVariablesOfType('//#define');
+    var allStringVars = currWorkspace.getVariablesOfType('//Using');
     var xmlList = [];
     var createDefineBtnXml = Blockly.Xml.textToDom('<xml><button text="' + 'Variable' + '" callbackKey="createVarBtnDefine">' +
             '</button></xml>').firstChild;
@@ -147,7 +147,7 @@ var defineVariablesCallBack = function (currWorkspace) {
             var blockText =
                     '<xml>' +
                     '<block type="vars_set_define" gap="' + gap + '">' +
-                    '<field name="VAR_SET_DEFINE" variabletype="//#define">' + firstVariable.name + '</field>' +
+                    '<field name="VAR_SET_DEFINE" variabletype="//Using">' + firstVariable.name + '</field>' +
                     '</block>' +
                     '</xml>';
             var block = Blockly.Xml.textToDom(blockText).firstChild;
@@ -159,7 +159,7 @@ var defineVariablesCallBack = function (currWorkspace) {
                 var blockText =
                         '<xml>' +
                         '<block type="vars_get_define" gap="8">' +
-                        '<field name="VAR_GET_DEFINE" variabletype="//#define">' + variable.name + '</field>' +
+                        '<field name="VAR_GET_DEFINE" variabletype="//Using">' + variable.name + '</field>' +
                         '</block>' +
                         '</xml>';
                 var block = Blockly.Xml.textToDom(blockText).firstChild;
