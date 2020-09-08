@@ -120,6 +120,7 @@ Blockly.Blocks['vars_get_boolean'] = {
 Blockly.Blocks['vars_set_define'] = {
     init: function () {
         var textInput = new Blockly.FieldTextInput('SOMETHING');
+        this.contextMenu=false;
         this.appendDummyInput()
                 .appendField("use")
                 .appendField(new Blockly.FieldVariable("", null, ['//Using'], '//Using'), "VAR_SET_DEFINE")
