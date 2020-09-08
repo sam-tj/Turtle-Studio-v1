@@ -142,5 +142,6 @@ Blockly.Blocks['vars_get_define'] = {
         this.setStyle('variable_blocks');
         this.setTooltip("");
         this.setHelpUrl("");
+        this.contextMenu=false;
     }
 };
