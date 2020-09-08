@@ -27,6 +27,9 @@ var createVarBtnStringCallBack = function (button) {
 var createVarBtnBooleanCallBack = function (button) {
     Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'bool');
 };
+var createVarBtnDefineCallBack = function (button) {
+    Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, '//#define');
+};
 
 var numVariablesCallBack = function (currWorkspace) {
     var allIntVars = currWorkspace.getVariablesOfType('int');
@@ -121,6 +124,42 @@ var textVariablesCallBack = function (currWorkspace) {
                         '<xml>' +
                         '<block type="vars_get_string" gap="8">' +
                         '<field name="VAR_GET_STRING" variabletype="String">' + variable.name + '</field>' +
+                        '</block>' +
+                        '</xml>';
+                var block = Blockly.Xml.textToDom(blockText).firstChild;
+                xmlList.push(block);
+            }
+        }
+    }
+    return xmlList;
+};
+
+var defineVariablesCallBack = function (currWorkspace) {
+    var allStringVars = currWorkspace.getVariablesOfType('//#define');
+    var xmlList = [];
+    var createDefineBtnXml = Blockly.Xml.textToDom('<xml><button text="' + 'Variable' + '" callbackKey="createVarBtnDefine">' +
+            '</button></xml>').firstChild;
+    xmlList.push(createDefineBtnXml);
+    if (allStringVars.length > 0) {
+        if (Blockly.Blocks['vars_set_define']) {
+            var firstVariable = allStringVars[allStringVars.length - 1];
+            var gap = 24;
+            var blockText =
+                    '<xml>' +
+                    '<block type="vars_set_define" gap="' + gap + '">' +
+                    '<field name="VAR_SET_DEFINE" variabletype="//#define">' + firstVariable.name + '</field>' +
+                    '</block>' +
+                    '</xml>';
+            var block = Blockly.Xml.textToDom(blockText).firstChild;
+            xmlList.push(block);
+        }
+        if (Blockly.Blocks['vars_get_define']) {
+            allStringVars.sort(Blockly.VariableModel.compareByType);
+            for (var i = 0, variable; variable = allStringVars[i]; i++) {
+                var blockText =
+                        '<xml>' +
+                        '<block type="vars_get_define" gap="8">' +
+                        '<field name="VAR_GET_DEFINE" variabletype="//#define">' + variable.name + '</field>' +
                         '</block>' +
                         '</xml>';
                 var block = Blockly.Xml.textToDom(blockText).firstChild;

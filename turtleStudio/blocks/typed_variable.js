@@ -116,3 +116,30 @@ Blockly.Blocks['vars_get_boolean'] = {
         this.setHelpUrl("");
     }
 };
+
+Blockly.Blocks['vars_set_define'] = {
+    init: function () {
+        var textInput = new Blockly.FieldTextInput('SOMETHING');
+        this.appendDummyInput()
+                .appendField("use")
+                .appendField(new Blockly.FieldVariable("", null, ['//#define'], '//#define'), "VAR_SET_DEFINE")
+                .appendField("in place of")
+                .appendField(textInput, 'VALUE');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setStyle('variable_blocks');
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['vars_get_define'] = {
+    init: function () {
+        this.appendDummyInput()
+                .appendField(new Blockly.FieldVariable("", null, ['//#define'], '//#define'), "VAR_GET_DEFINE");
+        this.setOutput(true, "String");
+        this.setStyle('variable_blocks');
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};

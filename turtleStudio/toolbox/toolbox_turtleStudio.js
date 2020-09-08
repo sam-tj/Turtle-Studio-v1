@@ -396,6 +396,7 @@ BLOCKLY_TOOLBOX_XML['toolboxturtleStudio'] =
 +    '<category name="%{BKY_CAT_VAR_NUM}" categorystyle="variable_category" custom="VARIABLE_TYPED_NUM"></category>'
 +    '<category name="%{BKY_CAT_VAR_TEXT}" categorystyle="variable_category" custom="VARIABLE_TYPED_TEXT"></category>'
 +    '<category name="%{BKY_CAT_VAR_BOOLEAN}" categorystyle="variable_category" custom="VARIABLE_TYPED_BOOLEAN"></category>'
++    '<category name="Define" categorystyle="variable_category" custom="VARIABLE_TYPED_DEFINE"></category>'
 + '<sep></sep>'
 + '<category name="%{BKY_CATFUNCTIONS}" categorystyle="procedure_category" custom="PROCEDURE"></category>'
 +    '<sep></sep>'

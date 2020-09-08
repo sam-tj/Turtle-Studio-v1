@@ -126,10 +126,12 @@ Code.init = function () {
     Code.workspace.registerButtonCallback('createVarBtnFloat', createVarBtnFloatCallBack);
     Code.workspace.registerButtonCallback('createVarBtnString', createVarBtnStringCallBack);
     Code.workspace.registerButtonCallback('createVarBtnBoolean', createVarBtnBooleanCallBack);
+    Code.workspace.registerButtonCallback('createVarBtnDefine', createVarBtnDefineCallBack);
     //add blocks in toolbox
     Code.workspace.registerToolboxCategoryCallback('VARIABLE_TYPED_NUM', numVariablesCallBack);
     Code.workspace.registerToolboxCategoryCallback('VARIABLE_TYPED_TEXT', textVariablesCallBack);
     Code.workspace.registerToolboxCategoryCallback('VARIABLE_TYPED_BOOLEAN', booleanVariablesCallBack);
+    Code.workspace.registerToolboxCategoryCallback('VARIABLE_TYPED_DEFINE', defineVariablesCallBack);
 
     Code.workspace.configureContextMenu = configureContextualMenu.bind(Code.workspace);
 
