@@ -62,9 +62,8 @@ Blockly.Arduino['vars_get_boolean'] = function (block) {
 Blockly.Arduino['vars_set_define'] = function (block) {
     //var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
     var argument0 = String(block.getFieldValue('VALUE'));
-    var varName = Blockly.Arduino.variableDB_.getName(block.getFieldValue('VAR_SET_DEFINE'), Blockly.Variables.NAME_TYPE);        
-    Blockly.Arduino.definitions_['define_'+varName] = '#define '+argument0+' '+varName+'\n';
-
+    var varName = Blockly.Arduino.variableDB_.getName(block.getFieldValue('VAR_SET_DEFINE'), Blockly.Variables.NAME_TYPE);
+    Blockly.Arduino.definitions_['define_'+varName] = '\n#define '+varName+' '+argument0+'\n';    
     return '';
 };
 
