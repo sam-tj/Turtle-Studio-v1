@@ -46,8 +46,9 @@
     transition-duration: 10s;
 }
 .iconButtons:disabled{
-    background: #F3F1EF;
-    color: #E7624F;
+    /* background: #F3F1EF; */
+    /* color: #E7624F; */    
+    color: silver;
     cursor : not-allowed;
 }
 .iconButtonsClicked{
