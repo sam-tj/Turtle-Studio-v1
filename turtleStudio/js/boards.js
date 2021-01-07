@@ -22,7 +22,7 @@ profile.default = profile["none"][0];
 Code.setBoard = function () {
     var boardId = Code.getStringParamFromUrl('board', '');
     if (!boardId) {
-        boardId = "none";
+        boardId = "arduino_uno";
     }
     document.getElementById('boardMenu').value = boardId;
     profile.default = profile[boardId][0];
