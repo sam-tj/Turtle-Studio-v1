@@ -14,7 +14,7 @@ goog.require('Blockly.Msg');
 Blockly.Msg.CAT_VAR_NUM = "Numbers";
 Blockly.Msg.CAT_VAR_TEXT = "Text";
 Blockly.Msg.CAT_VAR_BOOLEAN = "Boolean";
-Blockly.Msg.CAT_ARDUINO = "Arduino";
+Blockly.Msg.CAT_ARDUINO = "Board Control";
 Blockly.Msg.CAT_ARDUINO_I = "Input";
 Blockly.Msg.CAT_ARDUINO_O = "Output";
 Blockly.Msg.CAT_ARDUINO_OTHER = "Basic";
